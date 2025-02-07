@@ -24,8 +24,8 @@
 // Buon Lavoro e buon divertimento :metallica:
 
 
-// importiamo la bacheca con 
-const bacheca = require('../app');
+// importiamo i post 
+const posts = require('../data/posts')
 
 // impostiamo le funzioni realtive alle funzioni del router 
 function index(req, res) {
