@@ -25,7 +25,7 @@
 
 
 // importiamo i post 
-const posts = require('../data/posts')
+const posts = require('../data/posts');
 
 // impostiamo le funzioni realtive alle funzioni del router 
 function index(req, res) {
@@ -35,7 +35,9 @@ function index(req, res) {
 
 function show(req, res) {
     // funzione show
-    res.send('Post' + req.params.id);
+    const id = parseInt(req.params.id);
+    const post = posts.find(p => p.id === id);
+    res.json(post);
 }
 
 function store(req, res) {
@@ -55,7 +57,17 @@ function modify(req, res) {
 
 function destroy(req, res) {
     // funzione destroy
-    res.send('Elimina post' + req.params.id);
+    const id = parseInt(req.params.id);
+    const index = posts.findIndex(p => p.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ error: "Post non trovato" });
+    }
+
+    posts.splice(index, 1);
+    console.log("Lista aggiornata:", posts);
+
+    res.status(204).send();
 }
 
 
