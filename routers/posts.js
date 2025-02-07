@@ -20,35 +20,29 @@
 const express = require('express')
 const router = express.Router();
 
+// importiam il controller
+const controller = require('../controllers/postsController');
+
+
 // rotte crud
 
 // index
-router.get('/', function (req, res){
-    res.send('Lista dei posts');
-});
+router.get('/', controller.index);
 
 // show
-router.get('/:id', function (req, res){
-    res.send('Post' + req.params.id);
-});
+router.get('/:id', controller.show);
 
 // store
-router.post('/', function (req, res){
-    res.send('Creazione nuovo post');
-});
+router.post('/', controller.store);
 
 // update
-router.put('/:id', function (req, res){
-    res.send('Modifica del post' + req.params.id);
-});
+router.put('/:id', controller.update);
+
 // modify
-router.patch('/:id', function (req, res){
-    res.send('Patch del post' + req.params.id);
-});
+router.patch('/:id', controller.modify);
+
 // destroy
-router.delete('/:id', function (req, res){
-    res.send('Elimina post' + req.params.id);
-});
+router.delete('/:id', controller.destroy);
 
 // esportiamo il modulo 
 
