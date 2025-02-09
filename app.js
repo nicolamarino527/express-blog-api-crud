@@ -7,6 +7,9 @@ const app = express();
 const port = 3000;
 // importiamo il router
 const routerPosts = require('./routers/posts');
+const bodyParser = require('body-parser');
+// configuriamo il body parser
+app.use(express.json());
 
 // definiamo la cartella per i file statici
 app.use(express.static('public'));
