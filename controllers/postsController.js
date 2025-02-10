@@ -36,6 +36,11 @@ const posts = require('../data/posts');
 function index(req, res) {
     // funzione index 
     res.json(posts);
+    
+    // funzione di errore
+    if (!post) {
+        return res.status(404);
+    }
 }
 
 function show(req, res) {
@@ -43,6 +48,15 @@ function show(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(p => p.id === id);
     res.json(post);
+
+    // funzione di errore
+    if (!post) {
+        return res.status(404).json({ error: "Post non trovato" });
+    }
+
+    res.json(post);
+    
+    
 }
 
 function store(req, res) {
@@ -71,11 +85,23 @@ function store(req, res) {
 
     // restituiamo il nuovo post nello status correto e in formato json
     res.status(201)
+
+    // controllimo 
+    console.log(posts);
+    
+    
 }
 
 function update(req, res) {
     // funzione update
-    res.send('Modifica del post' + req.params.id);
+    // res.send('Modifica del post' + req.params.id);
+
+    // prendiamo l'id e trasformiamolo in un numero 
+    const id = parseInt(req.params.id);
+    
+    // cerchiamo i post tramite l'id
+    const index = posts.findIndex(p => p.id === id);
+
 }
 
 function modify(req, res) {
@@ -86,9 +112,9 @@ function modify(req, res) {
 function destroy(req, res) {
     // funzione destroy
     const id = parseInt(req.params.id);
-    const index = posts.findIndex(p => p.id === id);
+    const post = posts.find(p => p.id === id);
 
-    if (index === -1) {
+    if (!post) {
         return res.status(404).json({ error: "Post non trovato" });
     }
 
