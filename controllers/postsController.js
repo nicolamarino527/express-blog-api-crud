@@ -26,6 +26,11 @@
 
 // importiamo i post 
 const posts = require('../data/posts');
+// console.log(posts);
+// const id = req.posts.id
+// console.log(id);
+
+
 
 // impostiamo le funzioni realtive alle funzioni del router 
 function index(req, res) {
@@ -41,8 +46,31 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    // funzione update
+    // funzione post
     res.send('Creazione nuovo post');
+    // stampiamo il corpo della richiesta nel terminale
+    // console.log(req.body);
+
+    // aggiungiamo l' id dal momento in cui non disponiamo di un database
+    const lastPost = posts[posts.length - 1];
+    const idLastPost = lastPost.id;
+    const newId = idLastPost + 1;
+    console.log(newId);
+    
+    // nuovo post aggiunto 
+
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image
+    }
+
+    // aggiungiamo il post alla lista
+    posts.push(newPost);
+
+    // restituiamo il nuovo post nello status correto e in formato json
+    res.status(201)
 }
 
 function update(req, res) {
