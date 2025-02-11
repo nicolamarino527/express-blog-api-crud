@@ -33,37 +33,42 @@ const posts = require('../data/posts');
 
 
 // impostiamo le funzioni realtive alle funzioni del router 
+
+
+
+// funzione index 
 function index(req, res) {
-    // funzione index 
+
+    // restituiamo la lista di posts in formato json
     res.json(posts);
     
-    // funzione di errore
+    // definiamo il caso dell'errore 
     if (!post) {
         return res.status(404);
     }
+    
 }
 
+
+
+// funzione show
 function show(req, res) {
-    // funzione show
     const id = parseInt(req.params.id);
     const post = posts.find(p => p.id === id);
-    res.json(post);
 
-    // funzione di errore
+    // diamo l'errore nel momento in cui il post non viene trovato
     if (!post) {
         return res.status(404).json({ error: "Post non trovato" });
     }
 
     res.json(post);
-    
-    
 }
 
+
+
+// funzione post
 function store(req, res) {
-    // funzione post
     res.send('Creazione nuovo post');
-    // stampiamo il corpo della richiesta nel terminale
-    // console.log(req.body);
 
     // aggiungiamo l' id dal momento in cui non disponiamo di un database
     const lastPost = posts[posts.length - 1];
@@ -92,25 +97,47 @@ function store(req, res) {
     
 }
 
+
+
+// funzione update
 function update(req, res) {
-    // funzione update
     // res.send('Modifica del post' + req.params.id);
 
     // prendiamo l'id e trasformiamolo in un numero 
     const id = parseInt(req.params.id);
     
     // cerchiamo i post tramite l'id
-    const index = posts.findIndex(p => p.id === id);
+    const post = posts.find(p => p.id === id)
 
+    // impostiamo lo stato di errore
+    if (!post) {
+        return res.status(404).json({ error: "Post non trovato" });
+    }
+
+    // modifichiamo i dati del post
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    // stampiamo in console
+    console.log(posts);
+    
+    // restituiamo il json
+    res.json(post);
 }
 
+
+// funzione modify
 function modify(req, res) {
-    // funzione modify
     res.send('Patch del post' + req.params.id);
+
 }
 
+
+
+// funzione destroy
 function destroy(req, res) {
-    // funzione destroy
     const id = parseInt(req.params.id);
     const post = posts.find(p => p.id === id);
 

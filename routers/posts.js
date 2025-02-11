@@ -47,3 +47,6 @@ router.delete('/:id', controller.destroy);
 // esportiamo il modulo 
 
 module.exports = router;
+
+
+// http://localhost:3000/posts
