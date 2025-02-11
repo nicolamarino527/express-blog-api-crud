@@ -114,6 +114,7 @@ function update(req, res) {
         return res.status(404).json({ error: "Post non trovato" });
     }
 
+
     // modifichiamo i dati del post
     post.title = req.body.title;
     post.content = req.body.content;
@@ -130,7 +131,25 @@ function update(req, res) {
 
 // funzione modify
 function modify(req, res) {
-    res.send('Patch del post' + req.params.id);
+    // res.send('Patch del post' + req.params.id);
+    
+    // cerchiamo i post tramite l'id
+    const post = posts.find(p => p.id === id)
+
+    // impostiamo lo stato di errore
+    if (!post) {
+        return res.status(404).json({ error: "Post non trovato" });
+    }
+
+    // modifichiamo i dati del post
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    // restituiamo il json
+    res.json(post);
+
 
 }
 
@@ -150,6 +169,5 @@ function destroy(req, res) {
 
     res.status(204).send();
 }
-
 
 module.exports = { index, show, store, update, modify, destroy};
