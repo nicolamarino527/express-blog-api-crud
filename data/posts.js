@@ -47,11 +47,3 @@ const posts = [
 module.exports = posts;
 
 
-// {
-//   "title": "Dolce buonissimo",
-//   "content": "`La nostra ricetta della pasta barbabietola e gorgonzola vuole ricreare in questo primo piatto un abbinamento appetitoso, già proposto con la torta salata alla barbabietola! Per un pranzo veloce ma gustoso, per chi ama giocare con consistenze e colori naturali in cucina, questa pasta è perfetta! La dolcezza della barbabietola smorza il gusto deciso che caratterizza questo formaggio erborinato molto`,",
-//   "image": "/imgs/posts/pasta_barbabietola.avif",
-//   "tags": [
-//       "buono"
-//   ]
-// }
