@@ -20,6 +20,7 @@
 const express = require('express')
 const router = express.Router();
 
+
 // importiam il controller
 const controller = require('../controllers/postsController');
 

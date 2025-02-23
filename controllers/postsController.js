@@ -18,7 +18,7 @@ function index(req, res) {
     res.json(posts);
 
     // definiamo il caso dell'errore 
-    if (!post) {
+    if (!posts) {
         return res.status(404);
     }
 
